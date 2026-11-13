@@ -1,0 +1,16 @@
+$ curl -sS -i http://localhost:8080/api/requests; echo
+HTTP/1.0 503 Service Unavailable
+Server: BaseHTTP/0.6 Python/3.13.18
+Date: Fri, 13 Nov 2026 09:35:49 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 59
+Cache-Control: no-store
+
+{"error": "upstream_unavailable", "request_id": "cfcde84d"}
+$ curl -sS http://localhost:8080/health; echo
+{"process": "running", "role": "web"}
+$ docker compose -f compose.student.yaml logs web | grep upstream_unavailable | tail -3
+web-1  | {"time": "2026-11-13T09:35:35.750405+00:00", "role": "web", "event": "upstream_unavailable", "request_id": "6dd74290", "target": "http://api:9999", "error": "<urlopen error [Errno 111] Connection refused>"}
+web-1  | {"time": "2026-11-13T09:35:49.310231+00:00", "role": "web", "event": "upstream_unavailable", "request_id": "cfcde84d", "target": "http://api:9999", "error": "<urlopen error [Errno 111] Connection refused>"}
+$ docker compose -f compose.student.yaml exec web python -c "import urllib.request as u; print(u.urlopen(\"http://api:8000/health\").read())"
+b'{"process": "running", "role": "api"}'

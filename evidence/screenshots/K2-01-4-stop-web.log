@@ -1,0 +1,14 @@
+$ docker compose stop web
+ Container devops-course-web-1 Stopping 
+ Container devops-course-web-1 Stopped 
+$ docker compose ps -a
+NAME                  IMAGE                COMMAND           SERVICE   CREATED         STATUS                                PORTS
+devops-course-api-1   devops-course:base   "python app.py"   api       2 minutes ago   Up 2 minutes (healthy)                8000/tcp
+devops-course-web-1   devops-course:base   "python app.py"   web       2 minutes ago   Exited (137) Less than a second ago   
+$ curl -sS -m 3 http://localhost:8080/ ; echo "код выхода curl: $?"
+код выхода curl: 7
+curl: (7) Failed to connect to localhost port 8080 after 0 ms: Couldn't connect to server
+$ docker image ls devops-course:base
+IMAGE                ID             DISK USAGE   CONTENT SIZE   EXTRA
+devops-course:base   afc5aff08746        181MB         44.2MB   U    
+WARNING: This output is designed for human readability. For machine-readable output, please use --format.

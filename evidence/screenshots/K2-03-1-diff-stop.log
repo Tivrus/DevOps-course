@@ -1,0 +1,18 @@
+$ diff compose.yaml compose.student.yaml
+3c3
+<     image: devops-course:base
+---
+>     image: devops-student:v1
+16c16
+<     image: devops-course:base
+---
+>     image: devops-student:v1
+$ docker compose stop
+ Container devops-course-web-1 Stopping 
+ Container devops-course-web-1 Stopped 
+ Container devops-course-api-1 Stopping 
+ Container devops-course-api-1 Stopped 
+$ docker compose ps -a
+NAME                  IMAGE                COMMAND           SERVICE   CREATED          STATUS                                PORTS
+devops-course-api-1   devops-course:base   "python app.py"   api       10 minutes ago   Exited (137) Less than a second ago   
+devops-course-web-1   devops-course:base   "python app.py"   web       10 minutes ago   Exited (137) 10 seconds ago           

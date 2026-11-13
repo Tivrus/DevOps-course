@@ -1,0 +1,20 @@
+$ docker run --rm -d --name student-web -p 127.0.0.1:8081:8000 -e ROLE=web devops-student:v1
+670006b92a9d7b6dc60452b3c9f1b14bb7fe317e5c00c17d27c451f5e33f7fb0
+$ sleep 1; docker ps --filter name=student-web
+CONTAINER ID   IMAGE               COMMAND           CREATED         STATUS        PORTS                      NAMES
+670006b92a9d   devops-student:v1   "python app.py"   2 seconds ago   Up 1 second   127.0.0.1:8081->8000/tcp   student-web
+$ curl -sS -i http://localhost:8081/health; echo
+HTTP/1.0 200 OK
+Server: BaseHTTP/0.6 Python/3.13.18
+Date: Fri, 13 Nov 2026 09:29:36 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 37
+Cache-Control: no-store
+
+{"process": "running", "role": "web"}
+$ docker exec student-web sh -c "id; ls -ld /data; ls -l /app"
+uid=10001 gid=10001 groups=10001
+drwxr-xr-x 2 10001 10001 4096 Nov 13 09:28 /data
+total 16
+-rw-rw-r-- 1 root root 6048 Nov 13 09:12 app.py
+-rw-rw-r-- 1 root root 6347 Nov 13 09:12 index.html

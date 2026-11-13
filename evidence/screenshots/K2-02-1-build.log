@@ -1,0 +1,55 @@
+$ cat lab/Dockerfile | grep -v "^#" | grep -v "^$"
+FROM python:3.13-slim-bookworm
+LABEL course.student="STUDENT-CODE"
+WORKDIR /app
+ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
+COPY app.py index.html ./
+RUN mkdir /data && chown 10001:10001 /data
+USER 10001:10001
+EXPOSE 8000
+CMD ["python", "app.py"]
+$ docker build -f lab/Dockerfile -t devops-student:v1 lab
+Sending build context to Docker daemon  18.43kB
+
+Step 1/9 : FROM python:3.13-slim-bookworm
+ ---> a5a7017efc59
+Step 2/9 : LABEL course.student="STUDENT-CODE"
+ ---> Running in 4a00d768ed9e
+ ---> Removed intermediate container 4a00d768ed9e
+ ---> 3c438e294038
+Step 3/9 : WORKDIR /app
+ ---> Running in d9838696a690
+ ---> Removed intermediate container d9838696a690
+ ---> 80fb96b30131
+Step 4/9 : ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
+ ---> Running in 4d3594a499c7
+ ---> Removed intermediate container 4d3594a499c7
+ ---> efc4f80864bc
+Step 5/9 : COPY app.py index.html ./
+ ---> 5ac673663671
+Step 6/9 : RUN mkdir /data && chown 10001:10001 /data
+ ---> Running in eeda762e3090
+ ---> Removed intermediate container eeda762e3090
+ ---> a9a5c477cf6a
+Step 7/9 : USER 10001:10001
+ ---> Running in dfb4d06ff4eb
+ ---> Removed intermediate container dfb4d06ff4eb
+ ---> ccdb7fe5fd97
+Step 8/9 : EXPOSE 8000
+ ---> Running in 7bf6af132480
+ ---> Removed intermediate container 7bf6af132480
+ ---> ba750ccefb3c
+Step 9/9 : CMD ["python", "app.py"]
+ ---> Running in 5b399136a395
+ ---> Removed intermediate container 5b399136a395
+ ---> 09faf3d77d73
+Successfully built 09faf3d77d73
+Successfully tagged devops-student:v1
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+$ docker image ls devops-student
+IMAGE               ID             DISK USAGE   CONTENT SIZE   EXTRA
+devops-student:v1   09faf3d77d73        181MB         44.2MB        
+WARNING: This output is designed for human readability. For machine-readable output, please use --format.

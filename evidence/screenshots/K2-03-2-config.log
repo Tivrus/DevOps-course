@@ -1,0 +1,60 @@
+$ docker compose -f compose.student.yaml config
+name: devops-course
+services:
+  api:
+    environment:
+      DATA_DIR: /data
+      ROLE: api
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health',
+          timeout=2)
+      timeout: 3s
+      interval: 3s
+      retries: 10
+    image: devops-student:v1
+    networks:
+      default: null
+    pull_policy: never
+    volumes:
+      - type: volume
+        source: requests
+        target: /data
+        volume: {}
+  web:
+    depends_on:
+      api:
+        condition: service_healthy
+        required: true
+    environment:
+      API_URL: http://api:8000
+      ROLE: web
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health',
+          timeout=2)
+      timeout: 3s
+      interval: 3s
+      retries: 10
+    image: devops-student:v1
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        host_ip: 127.0.0.1
+        target: 8000
+        published: "8080"
+        protocol: tcp
+    pull_policy: never
+networks:
+  default:
+    name: devops-course_default
+volumes:
+  requests:
+    name: devops-course_requests

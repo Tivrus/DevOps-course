@@ -1,0 +1,20 @@
+$ grep -n -B2 -A1 API_URL compose.student.yaml
+18-    environment:
+19-      ROLE: web
+20:      API_URL: http://api:9999
+21-    ports:
+$ docker compose -f compose.student.yaml up -d web
+ Container devops-course-api-1 Running 
+ Container devops-course-web-1 Recreate 
+ Container devops-course-web-1 Recreated 
+ Container devops-course-api-1 Waiting 
+ Container devops-course-api-1 Healthy 
+ Container devops-course-web-1 Starting 
+ Container devops-course-web-1 Started 
+$ docker compose -f compose.student.yaml ps
+NAME                       IMAGE               COMMAND                  SERVICE    CREATED              STATUS                                     PORTS
+devops-course-api-1        devops-student:v1   "python app.py"          api        2 minutes ago        Up 2 minutes (healthy)                     8000/tcp
+devops-course-registry-1   registry:3.0.0      "/entrypoint.sh /etc…"   registry   About a minute ago   Up About a minute                          127.0.0.1:5000->5000/tcp
+devops-course-web-1        devops-student:v1   "python app.py"          web        12 seconds ago       Up Less than a second (health: starting)   127.0.0.1:8080->8000/tcp
+$ docker inspect devops-course-web-1 --format '{{range .Config.Env}}{{println .}}{{end}}' | grep API_URL
+API_URL=http://api:9999

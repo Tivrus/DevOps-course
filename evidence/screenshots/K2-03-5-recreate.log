@@ -1,0 +1,17 @@
+$ docker inspect devops-course-api-1 --format 'до: id={{.Id}} created={{.Created}}'
+до: id=08565f7221a5e60fc611049e44a32e1d890fd53426163098807a264d485d029a created=2026-11-13T09:31:45.790978724Z
+$ docker compose -f compose.student.yaml up -d --no-deps --force-recreate api
+ Container devops-course-api-1 Recreate 
+ Container devops-course-api-1 Recreated 
+ Container devops-course-api-1 Starting 
+ Container devops-course-api-1 Started 
+$ docker inspect devops-course-api-1 --format 'после: id={{.Id}} created={{.Created}}'
+после: id=a112f599acfeb5db7826cc550ffef10785505b892595f6262d14363e9291ec90 created=2026-11-13T09:32:34.382683208Z
+$ until [ "$(docker inspect -f {{.State.Health.Status}} devops-course-api-1)" = healthy ]; do sleep 1; done; docker compose -f compose.student.yaml ps
+NAME                  IMAGE               COMMAND           SERVICE   CREATED              STATUS                        PORTS
+devops-course-api-1   devops-student:v1   "python app.py"   api       19 seconds ago       Up 5 seconds (healthy)        8000/tcp
+devops-course-web-1   devops-student:v1   "python app.py"   web       About a minute ago   Up About a minute (healthy)   127.0.0.1:8080->8000/tcp
+$ curl -sS http://localhost:8080/api/requests; echo
+{"requests": [{"id": 3, "kind": "software", "created": "2026-11-13T09:32:12.510621+00:00"}, {"id": 2, "kind": "battery", "created": "2026-11-13T09:25:43.530332+00:00"}, {"id": 1, "kind": "screen", "created": "2026-11-13T09:24:20.396510+00:00"}], "total": 3, "instance": "a112f599acfe"}
+$ docker inspect devops-course-api-1 --format '{{range .Mounts}}{{.Type}} {{.Name}} -> {{.Destination}}{{end}}'
+volume devops-course_requests -> /data

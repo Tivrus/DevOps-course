@@ -1,0 +1,19 @@
+$ grep -n API_URL compose.student.yaml
+20:      API_URL: http://api:8000
+$ docker compose -f compose.student.yaml up -d --wait web
+ Container devops-course-api-1 Running 
+ Container devops-course-web-1 Recreate 
+ Container devops-course-web-1 Recreated 
+ Container devops-course-api-1 Waiting 
+ Container devops-course-api-1 Healthy 
+ Container devops-course-web-1 Starting 
+ Container devops-course-web-1 Started 
+ Container devops-course-api-1 Waiting 
+ Container devops-course-web-1 Waiting 
+ Container devops-course-api-1 Healthy 
+ Container devops-course-web-1 Healthy 
+$ docker compose -f compose.student.yaml ps web
+NAME                  IMAGE               COMMAND           SERVICE   CREATED          STATUS                   PORTS
+devops-course-web-1   devops-student:v1   "python app.py"   web       17 seconds ago   Up 5 seconds (healthy)   127.0.0.1:8080->8000/tcp
+$ curl -sS http://localhost:8080/api/requests | head -c 120; echo
+{"requests": [{"id": 4, "kind": "screen", "created": "2026-11-13T09:33:22.023063+00:00"}, {"id": 3, "kind": "software", 

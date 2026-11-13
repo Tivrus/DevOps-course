@@ -1,0 +1,15 @@
+$ docker compose start --wait web
+ Container devops-course-api-1 Waiting 
+ Container devops-course-api-1 Healthy 
+ Container devops-course-web-1 Starting 
+ Container devops-course-web-1 Started 
+ Container devops-course-api-1 Waiting 
+ Container devops-course-web-1 Waiting 
+ Container devops-course-api-1 Healthy 
+ Container devops-course-web-1 Healthy 
+$ docker compose ps
+NAME                  IMAGE                COMMAND           SERVICE   CREATED         STATUS                   PORTS
+devops-course-api-1   devops-course:base   "python app.py"   api       4 minutes ago   Up 4 minutes (healthy)   8000/tcp
+devops-course-web-1   devops-course:base   "python app.py"   web       4 minutes ago   Up 5 seconds (healthy)   127.0.0.1:8080->8000/tcp
+$ curl -sS http://localhost:8080/health; echo
+{"process": "running", "role": "web"}

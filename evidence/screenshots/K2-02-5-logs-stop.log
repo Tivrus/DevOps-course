@@ -1,0 +1,9 @@
+$ docker logs student-web
+{"time": "2026-11-13T09:29:36.755488+00:00", "role": "web", "event": "started", "port": 8000, "instance": "670006b92a9d"}
+{"time": "2026-11-13T09:29:36.931583+00:00", "role": "web", "event": "http", "method": "GET", "path": "/health", "detail": "\"GET /health HTTP/1.1\" 200 -"}
+{"time": "2026-11-13T09:29:57.169235+00:00", "role": "web", "event": "http", "method": "GET", "path": "/health", "detail": "\"GET /health HTTP/1.1\" 200 -"}
+{"time": "2026-11-13T09:29:58.443003+00:00", "role": "web", "event": "http", "method": "GET", "path": "/favicon.ico", "detail": "\"GET /favicon.ico HTTP/1.1\" 404 -"}
+$ docker stop student-web
+student-web
+$ docker ps -a --filter name=student-web
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES

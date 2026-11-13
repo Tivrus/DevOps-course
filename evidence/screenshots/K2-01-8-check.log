@@ -1,0 +1,5 @@
+$ curl -sS http://localhost:8080/api/requests; echo
+{"requests": [{"id": 2, "kind": "battery", "created": "2026-11-13T09:25:43.530332+00:00"}, {"id": 1, "kind": "screen", "created": "2026-11-13T09:24:20.396510+00:00"}], "total": 2, "instance": "56e05ee65424"}
+$ docker compose logs api | grep request_accepted
+api-1  | {"time": "2026-11-13T09:24:20.406665+00:00", "role": "api", "event": "request_accepted", "request_id": 1}
+api-1  | {"time": "2026-11-13T09:25:43.537625+00:00", "role": "api", "event": "request_accepted", "request_id": 2}

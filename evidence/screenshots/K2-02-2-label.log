@@ -1,0 +1,7 @@
+$ docker image inspect devops-student:v1 | grep -A3 "\"Labels\""
+            "Labels": {
+                "course.student": "STUDENT-CODE"
+            },
+            "User": "10001:10001",
+$ docker image inspect devops-student:v1 --format 'course.student={{index .Config.Labels "course.student"}}  User={{.Config.User}}  Cmd={{json .Config.Cmd}}  WorkingDir={{.Config.WorkingDir}}  ExposedPorts={{json .Config.ExposedPorts}}'
+course.student=STUDENT-CODE  User=10001:10001  Cmd=["python","app.py"]  WorkingDir=/app  ExposedPorts={"8000/tcp":{}}

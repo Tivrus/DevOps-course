@@ -1,0 +1,5 @@
+$ curl -sS http://localhost:8080/api/requests; echo
+{"requests": [{"id": 4, "kind": "screen", "created": "2026-11-13T09:33:22.023063+00:00"}, {"id": 3, "kind": "software", "created": "2026-11-13T09:32:12.510621+00:00"}, {"id": 2, "kind": "battery", "created": "2026-11-13T09:25:43.530332+00:00"}, {"id": 1, "kind": "screen", "created": "2026-11-13T09:24:20.396510+00:00"}], "total": 4, "instance": "a112f599acfe"}
+$ docker compose -f compose.student.yaml logs api | grep -E "started|request_accepted"
+api-1  | {"time": "2026-11-13T09:32:49.628585+00:00", "role": "api", "event": "started", "port": 8000, "instance": "a112f599acfe"}
+api-1  | {"time": "2026-11-13T09:33:22.275749+00:00", "role": "api", "event": "request_accepted", "request_id": 4}

@@ -1,0 +1,62 @@
+$ docker image inspect localhost:5000/workshop:v1
+[
+    {
+        "Architecture": "amd64",
+        "Config": {
+            "Cmd": [
+                "python",
+                "app.py"
+            ],
+            "Env": [
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+                "PYTHON_VERSION=3.13.18",
+                "PYTHON_SHA256=abb0102e6d4ae027509bcb82327d9dd85515b44a3ba8ad538cfc5e9847029f68",
+                "PYTHONUNBUFFERED=1",
+                "PYTHONDONTWRITEBYTECODE=1"
+            ],
+            "ExposedPorts": {
+                "8000/tcp": {}
+            },
+            "Labels": {
+                "course.student": "STUDENT-CODE"
+            },
+            "User": "10001:10001",
+            "WorkingDir": "/app"
+        },
+        "Created": "2026-11-13T12:29:04.850593506+03:00",
+        "Descriptor": {
+            "digest": "sha256:09faf3d77d73ea9a055696b00ea3cd0fd1e3d9760645441350e2afcf987cf560",
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "size": 1830
+        },
+        "Id": "sha256:09faf3d77d73ea9a055696b00ea3cd0fd1e3d9760645441350e2afcf987cf560",
+        "Metadata": {
+            "LastTagTime": "2026-11-13T09:34:35.143478455Z"
+        },
+        "Os": "linux",
+        "Parent": "sha256:ba750ccefb3cfeadc3e95d600b128df78f2dd69f28c9a396048b14fb480f9d63",
+        "RepoDigests": [
+            "devops-student@sha256:09faf3d77d73ea9a055696b00ea3cd0fd1e3d9760645441350e2afcf987cf560",
+            "localhost:5000/workshop@sha256:09faf3d77d73ea9a055696b00ea3cd0fd1e3d9760645441350e2afcf987cf560"
+        ],
+        "RepoTags": [
+            "devops-student:v1",
+            "localhost:5000/workshop:v1"
+        ],
+        "RootFS": {
+            "Layers": [
+                "sha256:1d7b9dd8778ebc4d9bf2f64436dd358640718cb349f5640b33bebaea4ffd62c2",
+                "sha256:2fd6871b68f33dff2bf69f2e323c6026a61f540949d5ad67df4b692a202a254d",
+                "sha256:00d998d1ba03b9bf10aac0f3729e32b36dee2d89b05a64794afa188b61c2dc38",
+                "sha256:8c7f8256728e8d8876990d8886b5995eeb856c444e46dbd441bc633f09a90865",
+                "sha256:40b83f302673477af6cf38bd692ac6b1d05c20eed0764bd2a8ee781e7a8efb9e",
+                "sha256:362517ae82e560f446e533c82250998deda17c62502091a929992911880bd00e",
+                "sha256:d7af6563557ec33aa61f8b4177e13945305c2d320ca40953cd2f9454b0da3a49"
+            ],
+            "Type": "layers"
+        },
+        "Size": 44215997
+    }
+]

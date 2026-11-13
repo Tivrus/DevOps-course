@@ -1,0 +1,22 @@
+$ docker compose -f compose.student.yaml up -d --wait
+ Container devops-course-api-1 Recreate 
+ Container devops-course-api-1 Recreated 
+ Container devops-course-web-1 Recreate 
+ Container devops-course-web-1 Recreated 
+ Container devops-course-api-1 Starting 
+ Container devops-course-api-1 Started 
+ Container devops-course-api-1 Waiting 
+ Container devops-course-api-1 Healthy 
+ Container devops-course-web-1 Starting 
+ Container devops-course-web-1 Started 
+ Container devops-course-api-1 Waiting 
+ Container devops-course-web-1 Waiting 
+ Container devops-course-api-1 Healthy 
+ Container devops-course-web-1 Healthy 
+$ docker compose -f compose.student.yaml ps
+NAME                  IMAGE               COMMAND           SERVICE   CREATED          STATUS                    PORTS
+devops-course-api-1   devops-student:v1   "python app.py"   api       11 seconds ago   Up 10 seconds (healthy)   8000/tcp
+devops-course-web-1   devops-student:v1   "python app.py"   web       10 seconds ago   Up 5 seconds (healthy)    127.0.0.1:8080->8000/tcp
+$ docker volume ls --filter name=devops-course_requests
+DRIVER    VOLUME NAME
+local     devops-course_requests

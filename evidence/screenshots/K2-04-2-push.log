@@ -1,0 +1,23 @@
+$ docker push localhost:5000/workshop:v1
+The push refers to repository [localhost:5000/workshop]
+dd051e1b8c92: Waiting
+07c4bc2f8a2c: Waiting
+f565bd0f3fa6: Waiting
+a2e654eaec5b: Waiting
+958ca80a8d52: Waiting
+a3e87ca60ef5: Waiting
+2c05a57a0083: Waiting
+f565bd0f3fa6: Pushed
+958ca80a8d52: Pushed
+2c05a57a0083: Pushed
+07c4bc2f8a2c: Pushed
+a2e654eaec5b: Pushed
+a3e87ca60ef5: Pushed
+dd051e1b8c92: Pushed
+v1: digest: sha256:09faf3d77d73ea9a055696b00ea3cd0fd1e3d9760645441350e2afcf987cf560 size: 1830
+$ curl -sS http://localhost:5000/v2/_catalog; echo
+{"repositories":["workshop"]}
+
+$ curl -sS http://localhost:5000/v2/workshop/tags/list; echo
+{"name":"workshop","tags":["v1"]}
+

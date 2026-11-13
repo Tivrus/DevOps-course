@@ -1,0 +1,57 @@
+$ docker image inspect devops-course:base
+[
+    {
+        "Architecture": "amd64",
+        "Config": {
+            "Cmd": [
+                "python",
+                "app.py"
+            ],
+            "Env": [
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+                "PYTHON_VERSION=3.13.18",
+                "PYTHON_SHA256=abb0102e6d4ae027509bcb82327d9dd85515b44a3ba8ad538cfc5e9847029f68",
+                "PYTHONUNBUFFERED=1",
+                "PYTHONDONTWRITEBYTECODE=1"
+            ],
+            "ExposedPorts": {
+                "8000/tcp": {}
+            },
+            "User": "10001:10001",
+            "WorkingDir": "/app"
+        },
+        "Created": "2026-11-13T12:18:39.180591504+03:00",
+        "Descriptor": {
+            "digest": "sha256:afc5aff087467e63e4140fdd2d8e6049d86194a1568adaf60c8d278a5529ff5a",
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "size": 1830
+        },
+        "Id": "sha256:afc5aff087467e63e4140fdd2d8e6049d86194a1568adaf60c8d278a5529ff5a",
+        "Metadata": {
+            "LastTagTime": "2026-11-13T09:18:39.4508191Z"
+        },
+        "Os": "linux",
+        "Parent": "sha256:a4f5ebc5dfe364eb2076af0df9474f191ed7291ade3132bb0c52a7363612f346",
+        "RepoDigests": [
+            "devops-course@sha256:afc5aff087467e63e4140fdd2d8e6049d86194a1568adaf60c8d278a5529ff5a"
+        ],
+        "RepoTags": [
+            "devops-course:base"
+        ],
+        "RootFS": {
+            "Layers": [
+                "sha256:1d7b9dd8778ebc4d9bf2f64436dd358640718cb349f5640b33bebaea4ffd62c2",
+                "sha256:2fd6871b68f33dff2bf69f2e323c6026a61f540949d5ad67df4b692a202a254d",
+                "sha256:00d998d1ba03b9bf10aac0f3729e32b36dee2d89b05a64794afa188b61c2dc38",
+                "sha256:8c7f8256728e8d8876990d8886b5995eeb856c444e46dbd441bc633f09a90865",
+                "sha256:0bb2de058540bde64599bfc2b324a4996fe58105a16855244922c2a236292a9f",
+                "sha256:39ac25ba7433c5f519224e5d4585144955637cf770296ba7e62658566b97928f",
+                "sha256:67d9fb0454272ea28b47df6dcbde40df8cfe8515b1ad5db728bab3142d96f73b"
+            ],
+            "Type": "layers"
+        },
+        "Size": 44215818
+    }
+]

@@ -1,0 +1,17 @@
+$ docker compose --profile registry up -d registry
+ Volume devops-course_registry Creating 
+ Volume devops-course_registry Creating 
+ Volume devops-course_registry Created 
+ Volume devops-course_registry Created 
+ Container devops-course-registry-1 Creating 
+ Container devops-course-registry-1 Created 
+ Container devops-course-registry-1 Starting 
+ Container devops-course-registry-1 Started 
+$ docker compose --profile registry ps registry
+NAME                       IMAGE            COMMAND                  SERVICE    CREATED         STATUS                  PORTS
+devops-course-registry-1   registry:3.0.0   "/entrypoint.sh /etc…"   registry   6 seconds ago   Up Less than a second   127.0.0.1:5000->5000/tcp
+$ docker tag devops-student:v1 localhost:5000/workshop:v1
+$ docker image ls --digests | grep -E "IMAGE|devops-student|workshop"
+REPOSITORY                TAG                  DIGEST                                                                    IMAGE ID       CREATED          SIZE
+devops-student            v1                   <none>                                                                    09faf3d77d73   5 minutes ago    181MB
+localhost:5000/workshop   v1                   sha256:09faf3d77d73ea9a055696b00ea3cd0fd1e3d9760645441350e2afcf987cf560   09faf3d77d73   5 minutes ago    181MB

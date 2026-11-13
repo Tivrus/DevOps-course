@@ -1,0 +1,12 @@
+$ docker compose -f compose.student.yaml logs api | grep request_accepted | tail -2
+api-1  | {"time": "2026-11-13T09:33:22.275749+00:00", "role": "api", "event": "request_accepted", "request_id": 4}
+api-1  | {"time": "2026-11-13T09:37:00.656143+00:00", "role": "api", "event": "request_accepted", "request_id": 5}
+$ diff compose.yaml compose.student.yaml
+3c3
+<     image: devops-course:base
+---
+>     image: devops-student:v1
+16c16
+<     image: devops-course:base
+---
+>     image: devops-student:v1

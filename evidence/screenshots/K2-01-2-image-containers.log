@@ -1,0 +1,25 @@
+$ docker image inspect devops-course:base --format 'ID={{.Id}}
+Created={{.Created}}
+Arch={{.Os}}/{{.Architecture}}  Size={{.Size}}
+WorkingDir={{.Config.WorkingDir}}  User={{.Config.User}}
+Cmd={{json .Config.Cmd}}  ExposedPorts={{json .Config.ExposedPorts}}
+Env={{json .Config.Env}}
+Layers={{len .RootFS.Layers}}'
+ID=sha256:afc5aff087467e63e4140fdd2d8e6049d86194a1568adaf60c8d278a5529ff5a
+Created=2026-11-13T12:18:39.180591504+03:00
+Arch=linux/amd64  Size=44215818
+WorkingDir=/app  User=10001:10001
+Cmd=["python","app.py"]  ExposedPorts={"8000/tcp":{}}
+Env=["PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin","LANG=C.UTF-8","GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305","PYTHON_VERSION=3.13.18","PYTHON_SHA256=abb0102e6d4ae027509bcb82327d9dd85515b44a3ba8ad538cfc5e9847029f68","PYTHONUNBUFFERED=1","PYTHONDONTWRITEBYTECODE=1"]
+Layers=7
+$ docker compose ps
+NAME                  IMAGE                COMMAND           SERVICE   CREATED              STATUS                        PORTS
+devops-course-api-1   devops-course:base   "python app.py"   api       About a minute ago   Up About a minute (healthy)   8000/tcp
+devops-course-web-1   devops-course:base   "python app.py"   web       About a minute ago   Up About a minute (healthy)   127.0.0.1:8080->8000/tcp
+$ docker ps --filter ancestor=devops-course:base --format 'table {{.Names}}\t{{.Image}}\t{{.Status}}'
+NAMES                 IMAGE                STATUS
+devops-course-web-1   devops-course:base   Up About a minute (healthy)
+devops-course-api-1   devops-course:base   Up About a minute (healthy)
+$ docker inspect devops-course-api-1 devops-course-web-1 --format '{{.Name}}: {{index .Config.Env 0}} | image={{.Config.Image}} | {{json .HostConfig.PortBindings}}'
+/devops-course-api-1: ROLE=api | image=devops-course:base | {}
+/devops-course-web-1: ROLE=web | image=devops-course:base | {"8000/tcp":[{"HostIp":"127.0.0.1","HostPort":"8080"}]}

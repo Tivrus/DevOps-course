@@ -1,0 +1,13 @@
+$ docker pull localhost:5000/workshop:v1
+v1: Pulling from workshop
+Digest: sha256:09faf3d77d73ea9a055696b00ea3cd0fd1e3d9760645441350e2afcf987cf560
+Status: Image is up to date for localhost:5000/workshop:v1
+localhost:5000/workshop:v1
+$ docker image inspect localhost:5000/workshop:v1 --format 'Id={{.Id}}
+RepoTags={{json .RepoTags}}
+RepoDigests={{json .RepoDigests}}
+Labels={{json .Config.Labels}}'
+Id=sha256:09faf3d77d73ea9a055696b00ea3cd0fd1e3d9760645441350e2afcf987cf560
+RepoTags=["devops-student:v1","localhost:5000/workshop:v1"]
+RepoDigests=["devops-student@sha256:09faf3d77d73ea9a055696b00ea3cd0fd1e3d9760645441350e2afcf987cf560","localhost:5000/workshop@sha256:09faf3d77d73ea9a055696b00ea3cd0fd1e3d9760645441350e2afcf987cf560"]
+Labels={"course.student":"STUDENT-CODE"}
